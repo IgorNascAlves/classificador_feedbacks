@@ -11,13 +11,16 @@ def analyze_feedback():
     feedback_text = data.get('feedback')
 
     # Realizar análise de sentimento
-    sentiment = analyze_sentiment(feedback_text)
+    sentiment, requested_features = analyze_sentiment(feedback_text)
 
     # Retornar a resposta com o formato desejado
     response_data = {
         "id": feedback_id,
-        "sentiment": sentiment
+        "requested_features": requested_features
     }
+    response_data.update(sentiment)
+
+    print(response_data)
 
     return jsonify(response_data)
 

@@ -52,3 +52,40 @@ def test_analyze_feedback_inconclusive(client):
     response_data = json.loads(response.data)
     assert response_data['id'] == feedback_data['id']
     assert response_data['sentiment'] == 'INCONCLUSIVO'
+
+def test_analyze_feedback_feature_identification(client):
+    # Testando a identificação de características no feedback
+    feedback_data = {
+        "id": "4042f20a-45f4-4647-8050-139ac16f610e",
+        "feedback": """
+                    Gosto muito de usar o Alumind! Está me ajudand
+                    o bastante em relação a alguns problemas que tenho. Só quer
+                    ia que houvesse uma forma mais fácil de eu mesmo realizar a
+                    edição do meu perfil dentro da minha conta"""
+    }
+
+    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    assert response.status_code == 200
+
+    response_data = json.loads(response.data)
+    assert response_data['id'] == feedback_data['id']
+    assert response_data['sentiment'] == 'POSITIVO'
+    assert response_data['requested_features']['code'] == 'EDITAR_PERFIL'
+    assert response_data['requested_features']['reason'] != ''
+
+def test_analyze_feedback_feature_identification_negative(client):
+    # Testando a identificação de características no feedback
+    feedback_data = {
+        "id": "4042f20a-45f4-4647-8050-139ac16f610f",
+        "feedback": """
+                    Não gostei do Alumind. Encontrei muitos problemas e não consegui resolver nada com ele. Assistir as aulas é muito complicado."""
+    }
+
+    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    assert response.status_code == 200
+
+    response_data = json.loads(response.data)
+    assert response_data['id'] == feedback_data['id']
+    assert response_data['sentiment'] == 'NEGATIVO'
+    assert response_data['requested_features']['code'] != ''
+    assert response_data['requested_features']['reason'] != ''
