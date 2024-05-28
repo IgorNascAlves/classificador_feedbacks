@@ -1,15 +1,28 @@
 import pytest
-from app import create_app
+from app import create_app, db
 from flask import json
 
 @pytest.fixture
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    client = app.test_client()
+def app():
+    app = create_app({
+        'TESTING': True,
+        'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
+        'SQLALCHEMY_TRACK_MODIFICATIONS': False
+    })
 
     with app.app_context():
-        yield client
+        db.create_all()
+        yield app
+        db.drop_all()
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+@pytest.fixture
+def runner(app):
+    return app.test_cli_runner()
+
 
 def test_analyze_feedback_positive(client):
     # Testando um feedback positivo
