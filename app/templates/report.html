@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Report</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Feedback Report</h1>
+        <div class="mb-4 feedback-summary">
+            <div class="feedback-card">
+                <p class="feedback-value">{{ total_feedbacks }}</p>
+                <p class="feedback-label">Total Feedbacks</p>
+            </div>
+            <div class="feedback-card positive-card">
+                <p class="feedback-value">{{ positive_percentage }}%</p>
+                <p class="feedback-label">Positive Feedbacks Percentage</p>
+            </div>
+            <div class="feedback-card negative-card">
+                <p class="feedback-value">{{ negative_percentage }}%</p>
+                <p class="feedback-label">Negative Feedbacks Percentage</p>
+            </div>
+        </div>         
+        <h2 class="mb-4">Most Requested Features</h2>
+        <button id="clear-filter" class="btn btn-secondary mb-3">Clear Filter</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Requests</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feature, count in sorted_features %}
+                <tr class="clickable-row" data-feature="{{ feature }}">
+                    <td>{{ feature }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mb-4">All Feedbacks</h2>
+        <table class="table table-striped" id="feedbacks-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Feedback</th>
+                    <th>Sentiment</th>
+                    <th>Code</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr class="feedback-row" data-code="{{ feedback.code }}">
+                    <td>{{ feedback.feedback_id }}</td>
+                    <td>{{ feedback.feedback_text }}</td>
+                    <td>{{ feedback.sentiment }}</td>
+                    <td>{{ feedback.code }}</td>
+                    <td>{{ feedback.reason }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
