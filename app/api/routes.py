@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from app.utils.FeedbackAnalysisPipeline import analyze_sentiment
 from app.models.models import Feedback, db
 
@@ -32,3 +32,36 @@ def analyze_feedback():
     }
 
     return jsonify(response_data)
+
+@api_bp.route('/report', methods=['GET'])
+def feedback_report():
+    feedbacks = Feedback.query.all()
+
+    total_feedbacks = len(feedbacks)
+    positive_feedbacks = len([f for f in feedbacks if f.sentiment == 'POSITIVO'])
+    negative_feedbacks = len([f for f in feedbacks if f.sentiment == 'NEGATIVO'])
+    
+
+    if total_feedbacks > 0:
+        positive_percentage = round((positive_feedbacks / total_feedbacks) * 100)
+        negative_percentage = round((negative_feedbacks / total_feedbacks) * 100)
+    else:
+        positive_percentage = 0
+        negative_percentage = 0
+
+    feature_requests = {}
+    for feedback in feedbacks:
+        code = feedback.code
+        if code in feature_requests:
+            feature_requests[code] += 1
+        else:
+            feature_requests[code] = 1
+
+    sorted_features = sorted(feature_requests.items(), key=lambda item: item[1], reverse=True)
+
+    return render_template('report.html', 
+                            total_feedbacks=total_feedbacks, 
+                            positive_percentage=positive_percentage,
+                            negative_percentage=negative_percentage, 
+                            sorted_features=sorted_features, 
+                            feedbacks=feedbacks)
