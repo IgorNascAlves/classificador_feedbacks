@@ -1,6 +1,7 @@
 -- Create the database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS feedbacks_db;
 
+drop table Feedback;
 -- Use the newly created or existing database
 USE feedbacks_db;
 
