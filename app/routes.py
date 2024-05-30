@@ -13,6 +13,24 @@ def analisar_feedback():
     feedback_id = data.get('id')
     feedback_text = data.get('feedback')
 
+    # Verificando se os dados foram fornecidos corretamente
+    if not feedback_id or not feedback_text:
+        return jsonify({"error": "Dados inválidos"}), 400
+    
+    # Verificando se o feedback já foi analisado
+    feedback = Feedback.query.filter_by(feedback_id=feedback_id).first()
+    if feedback:
+        response_data = {
+            "id": feedback_id,
+            "sentiment": feedback.sentiment,
+            "requested_features": {
+                "code": feedback.code,
+                "reason": feedback.reason
+            }
+        }
+        return jsonify(response_data)
+
+
     # Realizando a análise de sentimento
     sentiment, requested_features = analyze_sentiment(feedback_text)
 
