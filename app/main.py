@@ -106,7 +106,7 @@ def create_app(test_config=None):
 
     # Configura o agendador de tarefas para enviar o relatório semanal de feedbacks
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=send_weekly_report, trigger="interval", weeks=1)
+    scheduler.add_job(func=send_weekly_report, trigger="interval", minutes=5)
     scheduler.start()
 
     # Envia o relatório imediatamente após iniciar a aplicação

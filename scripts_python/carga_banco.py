@@ -2,7 +2,7 @@ import requests
 import json
 
 # URL of the API endpoint
-url = 'http://localhost:5000/api/feedbacks'
+url = 'http://localhost:5000/feedbacks'
 
 # List of feedback examples
 feedbacks = [

@@ -15,10 +15,3 @@ CREATE TABLE IF NOT EXISTS Feedback (
     reason TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-SELECT * FROM feedbacks_db.feedback;
-
--- Create a feedback
-
-INSERT INTO Feedback (feedback_id, feedback_text, sentiment, code, reason) VALUES ('1', 'I loved the product', 'positive', '1', 'good product');
-
