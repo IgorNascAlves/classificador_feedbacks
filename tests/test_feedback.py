@@ -2,25 +2,30 @@ import pytest
 from app import create_app, db
 from flask import json
 
+
 @pytest.fixture
 def app():
+    # Cria uma instância do aplicativo configurada para testes
     app = create_app({
-        'TESTING': True,
-        'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
-        'SQLALCHEMY_TRACK_MODIFICATIONS': False
+        'TESTING': True,  # Ativa o modo de teste
+        'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',  # Usa um banco de dados em memória para testes
+        'SQLALCHEMY_TRACK_MODIFICATIONS': False  # Desativa a modificação de rastreamento do SQLAlchemy
     })
 
+    # Dentro do contexto do aplicativo
     with app.app_context():
-        db.create_all()
-        yield app
-        db.drop_all()
+        db.create_all()  # Cria todas as tabelas no banco de dados
+        yield app  # Fornece a instância do aplicativo para os testes
+        db.drop_all()  # Remove todas as tabelas após os testes
 
 @pytest.fixture
 def client(app):
+    # Cria um cliente de teste para fazer solicitações à aplicação
     return app.test_client()
 
 @pytest.fixture
 def runner(app):
+    # Cria um runner de teste para executar comandos CLI
     return app.test_cli_runner()
 
 
