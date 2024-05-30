@@ -91,8 +91,8 @@ def create_app(test_config=None):
         db.create_all()
         logging.debug("Database tables created.")
 
-    from app.api.routes import api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    from app.routes import api_bp
+    app.register_blueprint(api_bp)
 
     scheduler = BackgroundScheduler()
     scheduler.add_job(func=send_weekly_report, trigger="interval", weeks=1)

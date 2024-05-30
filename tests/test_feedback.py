@@ -36,7 +36,7 @@ def test_analyze_feedback_positive(client):
         "feedback": "Gosto muito de usar o Alumind! Está me ajudando bastante em relação a alguns problemas que tenho. Só queria que houvesse uma forma mais fácil de eu mesmo realizar a edição do meu perfil dentro da minha conta"
     }
 
-    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
     assert response.status_code == 200
 
     response_data = json.loads(response.data)
@@ -50,7 +50,7 @@ def test_analyze_feedback_negative(client):
         "feedback": "Não gostei do Alumind. Encontrei muitos problemas e não consegui resolver nada com ele. A edição do perfil é muito complicada."
     }
 
-    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
     assert response.status_code == 200
 
     response_data = json.loads(response.data)
@@ -64,7 +64,7 @@ def test_analyze_feedback_inconclusive(client):
         "feedback": "O Alumind é bom em alguns aspectos, mas ruim em outros. Não sei se continuarei a usar."
     }
 
-    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
     assert response.status_code == 200
 
     response_data = json.loads(response.data)
@@ -82,7 +82,7 @@ def test_analyze_feedback_feature_identification(client):
                     edição do meu perfil dentro da minha conta"""
     }
 
-    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
     assert response.status_code == 200
 
     response_data = json.loads(response.data)
@@ -99,7 +99,7 @@ def test_analyze_feedback_feature_identification_negative(client):
                     Não gostei do Alumind. Encontrei muitos problemas e não consegui resolver nada com ele. Assistir as aulas é muito complicado."""
     }
 
-    response = client.post('/api/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
     assert response.status_code == 200
 
     response_data = json.loads(response.data)
