@@ -85,6 +85,7 @@ classificador_feedbacks/
    Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
    ```env
+   GOOGLE_API_KEY=sua_api_key
    DATABASE_URL=mysql+pymysql://root:password@localhost/feedbacks_db
    MAIL_SERVER=smtp.seuservidor.com
    MAIL_PORT=587
