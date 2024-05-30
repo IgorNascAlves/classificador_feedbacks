@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Feedback Report</title>
+    <title>Relatório de Feedbacks</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Feedback Report</h1>
+        <h1 class="mb-4">Relatório de Feedbacks</h1>
         <div class="mb-4 feedback-summary">
             <div class="feedback-card">
                 <p class="feedback-value">{{ total_feedbacks }}</p>
-                <p class="feedback-label">Total Feedbacks</p>
+                <p class="feedback-label">Total</p>
             </div>
             <div class="feedback-card positive-card">
                 <p class="feedback-value">{{ positive_percentage }}%</p>
-                <p class="feedback-label">Positive Feedbacks Percentage</p>
+                <p class="feedback-label">Positivos</p>
             </div>
             <div class="feedback-card negative-card">
                 <p class="feedback-value">{{ negative_percentage }}%</p>
-                <p class="feedback-label">Negative Feedbacks Percentage</p>
+                <p class="feedback-label">Negativos</p>
             </div>
         </div>         
-        <h2 class="mb-4">Most Requested Features</h2>
+        <h2 class="mb-4">Funcionalidades mais requisitadas</h2>
         <button id="clear-filter" class="btn btn-secondary mb-3">Clear Filter</button>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Feature</th>
-                    <th>Requests</th>
+                    <th>Funcionalidade</th>
+                    <th>Numero de pedidos</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,15 +42,15 @@
             </tbody>
         </table>
 
-        <h2 class="mb-4">All Feedbacks</h2>
+        <h2 class="mb-4">Todos os Feedbacks</h2>
         <table class="table table-striped" id="feedbacks-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Feedback</th>
-                    <th>Sentiment</th>
-                    <th>Code</th>
-                    <th>Reason</th>
+                    <th>Sentimento</th>
+                    <th>Funcionalidade</th>
+                    <th>Justificativa</th>
                 </tr>
             </thead>
             <tbody>
