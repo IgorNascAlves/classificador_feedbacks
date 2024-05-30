@@ -1,4 +1,4 @@
-from app import create_app  # Importa a função create_app do módulo app
+from app.main import create_app  # Importa a função create_app do módulo app
 
 # Cria uma instância do aplicativo utilizando a função create_app
 app = create_app()

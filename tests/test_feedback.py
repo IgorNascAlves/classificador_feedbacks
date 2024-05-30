@@ -1,5 +1,5 @@
 import pytest
-from app import create_app, db
+from app.main import create_app, db
 from flask import json
 
 
