@@ -40,7 +40,6 @@ def feedback_report():
     total_feedbacks = len(feedbacks)
     positive_feedbacks = len([f for f in feedbacks if f.sentiment == 'POSITIVO'])
     negative_feedbacks = len([f for f in feedbacks if f.sentiment == 'NEGATIVO'])
-    
 
     if total_feedbacks > 0:
         positive_percentage = round((positive_feedbacks / total_feedbacks) * 100)

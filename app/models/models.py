@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,3 +8,4 @@ class Feedback(db.Model):
     sentiment = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(50), nullable=True)
     reason = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())

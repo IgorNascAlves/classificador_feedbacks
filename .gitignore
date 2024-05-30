@@ -1,6 +1,9 @@
 #Folder docs
 docs/
 
+# Recipients email
+recipients.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
