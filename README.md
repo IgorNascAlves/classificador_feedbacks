@@ -62,6 +62,10 @@ classificador_feedbacks/
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # Linux/Mac
+   ```
+
+   ```bash
+   python -m venv .venv
    .\.venv\Scripts\activate  # Windows
    ```
 
@@ -69,6 +73,12 @@ classificador_feedbacks/
 
    ```bash
    pip install -r requirements.txt
+   ```
+
+   * Se você estiver no Linux, talvez seja necessário instalar o pacote `libmysqlclient-dev` para instalar o pacote `mysqlclient`. Você pode fazer isso com o comando `sudo apt-get install libmysqlclient-dev`.
+
+   ```bash
+   sudo apt-get install pkg-config libmysqlclient-dev
    ```
 
 4. **Configure o banco de dados:**
@@ -93,6 +103,8 @@ classificador_feedbacks/
    MAIL_USERNAME=seu_email@dominio.com
    MAIL_PASSWORD=sua_senha
    ```
+
+   * Precisa de uma chave de API do Google para usar o serviço de análise de sentimentos. Você pode obter uma chave [aqui](https://aistudio.google.com/app/apikey). Video tutorial [aqui](https://www.youtube.com/watch?v=SVOT_mSNXGc).
 
 6. **Configure os destinatários do email:**
 
