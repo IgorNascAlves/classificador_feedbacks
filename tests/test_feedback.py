@@ -107,3 +107,32 @@ def test_analyze_feedback_feature_identification_negative(client):
     assert response_data['sentiment'] == 'NEGATIVO'
     assert response_data['requested_features']['code'] != ''
     assert response_data['requested_features']['reason'] != ''
+
+# Testando a geração de relatório
+def test_generate_report(client):
+    # Testando a geração de relatório
+    response = client.get('/report')
+    assert response.status_code == 200
+
+# Testando se feedback com mesmo ID é retornado
+def test_analyze_feedback_twice(client):
+    # Testando um feedback positivo
+    feedback_data = {
+        "id": "4042f20a-45f4-4647-8050-139ac16f610g",
+        "feedback": "Gosto muito de usar o Alumind! Está me ajudando bastante em relação a alguns problemas que tenho. Só queria que houvesse uma forma mais fácil de eu mesmo realizar a edição do meu perfil dentro da minha conta"
+    }
+
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    assert response.status_code == 200
+
+    response_data = json.loads(response.data)
+    assert response_data['id'] == feedback_data['id']
+    assert response_data['sentiment'] == 'POSITIVO'
+
+    # Testando se o mesmo feedback é retornado
+    response = client.post('/feedbacks', data=json.dumps(feedback_data), content_type='application/json')
+    assert response.status_code == 200
+
+    response_data = json.loads(response.data)
+    assert response_data['id'] == feedback_data['id']
+    assert response_data['sentiment'] == 'POSITIVO'

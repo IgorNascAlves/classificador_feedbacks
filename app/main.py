@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from app.utils.email import format_email_content
+from app.utils.email_utils import format_email_content
 
 
 # Carrega as variáveis de ambiente do arquivo .env
@@ -106,7 +106,7 @@ def create_app(test_config=None):
 
     # Configura o agendador de tarefas para enviar o relatório semanal de feedbacks
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=send_weekly_report, trigger="interval", weeks=1)
+    scheduler.add_job(func=send_weekly_report, trigger="interval", minutes=5)
     scheduler.start()
 
     # Envia o relatório imediatamente após iniciar a aplicação
