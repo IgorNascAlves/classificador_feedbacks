@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from app.utils.email import format_email_content
+from app.utils.email_utils import format_email_content
 
 
 # Carrega as variáveis de ambiente do arquivo .env
