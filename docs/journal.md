@@ -40,7 +40,7 @@ Tarefas opcionais:
 - [x] Utilizar LLM para montar texto do email
 - [ ] Classificador de SPAM antes de reconhecer a funcionalidade e sentimentos
 - [ ] Melhorar o prompt de identificação de funcionalidades
-- [ ] Adicionar sweeger
+- [ ] Adicionar Swagger
 - [ ] Publicar no Pythonanywhere
 - [ ] Criar tarefas no Trello
 - [ ] Buscador por ID do feedback na pagina de report
